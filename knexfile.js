@@ -11,5 +11,11 @@ module.exports = {
     seeds: {
       directory: './data/seeds'
     },
+    // sqlite will not enforce Foreign Keys by default. This turns on FK enforcement
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }
+    },
   },
 };
